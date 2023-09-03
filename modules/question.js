@@ -25,7 +25,7 @@ async function question() {
             when: (answers) => answers.operation !== "Custom Expression 👾",
             validate: (input) => {
                 if (isNaN(input)) {
-                    return chalk.red("Please enter a valid number ❌");
+                    return chalk.red.italic("Please enter a valid number ❌");
                 }
                 return true;
             },
@@ -37,7 +37,7 @@ async function question() {
             when: (answers) => answers.operation !== "Custom Expression 👾",
             validate: (input) => {
                 if (isNaN(input)) {
-                    return chalk.red("Please enter a valid number ❌");
+                    return chalk.red.italic("❌ Please enter a valid number!");
                 }
                 return true;
             },
@@ -51,7 +51,7 @@ async function question() {
                 const regex = /^[0-9\-+\/*()]*$/;
                 return regex.test(expression)
                     ? true
-                    : chalk.red("Please enter a valid math expression ❌");
+                    : chalk.red.italic("❌ Please enter a valid math expression!");
             },
         },
     ]);

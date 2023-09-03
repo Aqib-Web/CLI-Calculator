@@ -11,7 +11,7 @@ async function restartQuestion() {
       )} ${chalk.yellow("➤")} `,
       validate: (input) =>
         /^(y|n|yes|no)$/i.test(input) ||
-        `${chalk.red(" ❌ Please enter Y or N | Yes or No ")}`,
+        `${chalk.red.italic("❌ Please enter Y or N | Yes or No!")}`,
     },
   ]);
   console.log("\n");
