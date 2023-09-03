@@ -3,7 +3,7 @@ import gradient from "gradient-string";
 import inquirer from "inquirer";
 import { createSpinner } from "nanospinner";
 import { sleep } from "./welcome.js";
-import { calculate, solveExpression, theAnswer } from "./calculate.js";
+import { calculate, solveExpression } from "./calculate.js";
 async function question() {
     const answer = await inquirer.prompt([
         {
@@ -22,22 +22,24 @@ async function question() {
             name: "num1",
             type: "number",
             message: `🔢 Enter the first number ${chalk.yellow("➤")} `,
-            default: theAnswer,
             when: (answers) => answers.operation !== "Custom Expression 👾",
             validate: (input) => {
-                const regex = /^\d+$/;
-                return regex.test(input) ? true : chalk.red("Please enter a number ❌");
+                if (isNaN(input)) {
+                    return chalk.red("Please enter a valid number ❌");
+                }
+                return true;
             },
         },
         {
             name: "num2",
             type: "number",
             message: `🔢 Enter the second number ${chalk.yellow("➤")} `,
-            default: theAnswer,
             when: (answers) => answers.operation !== "Custom Expression 👾",
             validate: (input) => {
-                const regex = /^\d+$/;
-                return regex.test(input) ? true : chalk.red("Please enter a number ❌");
+                if (isNaN(input)) {
+                    return chalk.red("Please enter a valid number ❌");
+                }
+                return true;
             },
         },
         {
@@ -63,4 +65,4 @@ async function question() {
         calculate(answer.operation, answer.num1, answer.num2);
     }
 }
-export { question, theAnswer };
+export { question };

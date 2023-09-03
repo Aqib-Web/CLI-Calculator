@@ -10,7 +10,8 @@ async function restartQuestion() {
         "Do you want to continue? (Y/N)"
       )} ${chalk.yellow("➤")} `,
       validate: (input) =>
-        /^(y|n|yes|no)$/i.test(input) || "Please enter Y or N | Yes or No",
+        /^(y|n|yes|no)$/i.test(input) ||
+        `${chalk.red(" ❌ Please enter Y or N | Yes or No ")}`,
     },
   ]);
   console.log("\n");

@@ -8,8 +8,8 @@ const stylizeAnswer = function (
 ) {
   let concString = `${chalk.bold(
     gradient.cristal("✨  Result")
-  )}  ${chalk.yellow("➤  ")} `;
-  concString += chalk.bold(`   ${num1} ${checkOperator(operator)} ${num2} = `);
+  )}  ${chalk.yellow("➤ ")} `;
+  concString += chalk.bold(` ${num1} ${checkOperator(operator)} ${num2} = `);
   concString += chalk.white.bgGreen.bold(`   ${result}   `) + "\n";
   return concString;
 };
@@ -17,8 +17,8 @@ const stylizeAnswer = function (
 const stylizeExpression = function (result: number, expression: string) {
   let concString = `${chalk.bold(
     gradient.cristal("✨  Result")
-  )}  ${chalk.yellow("➤  ")} `;
-  concString += chalk.bold(`   ${expression} = `);
+  )}  ${chalk.yellow("➤ ")} `;
+  concString += chalk.bold(` ${expression} = `);
   concString += chalk.white.bgGreen.bold(`   ${result}   `) + "\n";
   return concString;
 };
