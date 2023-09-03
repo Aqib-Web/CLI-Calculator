@@ -1,10 +1,29 @@
 import chalk from "chalk";
 import gradient from "gradient-string";
-
-export const stylizeAnswer = function (result) {
-  let concString = `${chalk.bold(
-    gradient.cristal("✨  Result")
-  )}  ${chalk.yellow("➤  ")} `;
-  concString += chalk.white.bgGreen.bold(`   ${result}   `) + "\n";
-  return concString;
+const stylizeAnswer = function (result, num1, num2, operator) {
+    let concString = `${chalk.bold(gradient.cristal("✨  Result"))}  ${chalk.yellow("➤  ")} `;
+    concString += chalk.bold(`   ${num1} ${checkOperator(operator)} ${num2} = `);
+    concString += chalk.white.bgGreen.bold(`   ${result}   `) + "\n";
+    return concString;
 };
+const stylizeExpression = function (result, expression) {
+    let concString = `${chalk.bold(gradient.cristal("✨  Result"))}  ${chalk.yellow("➤  ")} `;
+    concString += chalk.bold(`   ${expression} = `);
+    concString += chalk.white.bgGreen.bold(`   ${result}   `) + "\n";
+    return concString;
+};
+function checkOperator(operator) {
+    if (operator === "Addition ➕") {
+        return "+";
+    }
+    else if (operator === "Subtraction ➖") {
+        return "−";
+    }
+    else if (operator === "Multiplication ✖️") {
+        return "×";
+    }
+    else if (operator === "Division ➗") {
+        return "÷";
+    }
+}
+export { stylizeAnswer, stylizeExpression };

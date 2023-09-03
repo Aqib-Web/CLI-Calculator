@@ -2,8 +2,8 @@ import chalk from "chalk";
 import gradient from "gradient-string";
 import inquirer from "inquirer";
 import { createSpinner } from "nanospinner";
-import { stylizeAnswer } from "./stylizeAnswer.js";
 import { sleep } from "./welcome.js";
+import { calculate, solveExpression, theAnswer } from "./calculate.js";
 async function question() {
     const answer = await inquirer.prompt([
         {
@@ -22,6 +22,7 @@ async function question() {
             name: "num1",
             type: "number",
             message: `🔢 Enter the first number ${chalk.yellow("➤")} `,
+            default: theAnswer,
             when: (answers) => answers.operation !== "Custom Expression 👾",
             validate: (input) => {
                 const regex = /^\d+$/;
@@ -32,6 +33,7 @@ async function question() {
             name: "num2",
             type: "number",
             message: `🔢 Enter the second number ${chalk.yellow("➤")} `,
+            default: theAnswer,
             when: (answers) => answers.operation !== "Custom Expression 👾",
             validate: (input) => {
                 const regex = /^\d+$/;
@@ -54,21 +56,11 @@ async function question() {
     const spinner = createSpinner(`${gradient.summer("Calculating...\n")}`).start();
     await sleep(1000);
     spinner.success();
-    if (answer.operation === "Addition ➕") {
-        console.log(stylizeAnswer(answer.num1 + answer.num2));
+    if (answer.operation === "Custom Expression 👾") {
+        solveExpression(answer.expression);
     }
-    else if (answer.operation === "Subtraction ➖") {
-        console.log(stylizeAnswer(answer.num1 - answer.num2));
-    }
-    else if (answer.operation === "Multiplication ✖️") {
-        console.log(stylizeAnswer(answer.num1 * answer.num2));
-    }
-    else if (answer.operation === "Division ➗") {
-        console.log(stylizeAnswer(answer.num1 / answer.num2));
-    }
-    else if (answer.operation === "Custom Expression 👾") {
-        const result = eval(answer.expression);
-        console.log(stylizeAnswer(result));
+    else {
+        calculate(answer.operation, answer.num1, answer.num2);
     }
 }
-export { question };
+export { question, theAnswer };
